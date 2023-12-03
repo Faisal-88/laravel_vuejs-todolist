@@ -71,7 +71,7 @@ i {
       </div>
 <!-- content -->
       <div class="todolist-wrapper">
-       <table class="table table-striped table->bordered">
+       <table class="table table-striped table-bordered">
         <tbody>
          <!-- looping data_list -->
          <tr v-for="item in data_list">
@@ -121,7 +121,7 @@ findData: function() {
     
     editData: function(id) {
      this.id = id;
-axios.get(" {{ url ('api/todolist/read') }}/" + this.id)
+axios.post(" {{ url ('api/todolist/update') }}/" + this.id)
       .then(response => {
        var item = response.data;
        this.content = item.content;
@@ -133,7 +133,7 @@ $('#modal-form').modal('show');
     },
 deleteData: function(id) {
      if (confirm('Apakah data ini akan dihapus?')) {
-      axios.post(" {{ url('api/todolist/delete') }}/" + id)
+      axios.get(" {{ url('api/todolist/delete') }}/" + id)
        .then(response =>  {
         alert(response.data.message);
         this.getDataList();
