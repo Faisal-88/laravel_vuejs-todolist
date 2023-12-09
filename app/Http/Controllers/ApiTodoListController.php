@@ -34,6 +34,17 @@ class ApiTodoListController extends Controller
         ]);
         return response()->json(['status' => true, 'message' => 'Data berhasil Diupdate!']);
     }
+    public function show($id)
+{
+    $todo = DB::table('todolist')->find($id);
+
+    if (!$todo) {
+        return response()->json(['message' => 'Todo not found.'], 404);
+    }
+
+    return response()->json($todo);
+}
+
    // menghapus data (Delete)
     public function getDelete($id) {
      DB::table('todolist')
